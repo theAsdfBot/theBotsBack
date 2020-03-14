@@ -11,8 +11,6 @@ class ProductKey extends Model {
 
   public readonly expireAt!: Date;
 
-  associate: (() => void) | undefined;
-
   static initialize: (sequelize: Sequelize) => void;
 }
 
