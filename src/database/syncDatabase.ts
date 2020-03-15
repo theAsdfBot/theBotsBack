@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import ProductKey from '../models/ProductKey';
+import log from '../util/log';
 
 /**
  * Initialize all models and create relevant tables if they
@@ -11,6 +12,7 @@ import ProductKey from '../models/ProductKey';
 const sync = async (sequelize: Sequelize, force = false) => {
   ProductKey.initialize(sequelize);
 
+  log.debug(`Creating all necessary tables. dropping existing tables: ${force}`);
   await sequelize.sync({
     force,
   });
