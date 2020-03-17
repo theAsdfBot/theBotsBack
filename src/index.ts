@@ -10,4 +10,6 @@ syncDatabase(sequelize, true).then(() => {
   app.listen(config.port, () => {
     log.info(`Express listening on port ${config.port}`);
   });
+}).catch((err) => {
+  throw err;
 });
