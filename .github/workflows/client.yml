@@ -25,7 +25,7 @@ jobs:
       run: cd src && cd client && npm ci
     # Run lint
     - name: Run linter
-      run: npm run lint
+      run: cd src && cd client && npm run lint
 
   # Ensure TS compiles
   Compile:
@@ -46,4 +46,4 @@ jobs:
       run: cd src && cd client && npm ci
     # Compile
     - name: Compile TypeScript
-      run: npm run build
+      run: cd src && cd client && npm run build
