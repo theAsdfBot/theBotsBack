@@ -1,11 +1,32 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: BotNet CI
+name: BotNet Server
 
 on: [push]
 
 jobs:
+  # Ensure tests pass
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    # "checkout" this repo in Github's CI environment
+    - uses: actions/checkout@v2
+    # Install node.js
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    # Install dependencies
+    - name: Install dependencies
+      run: npm ci
+    # Run tests
+    - name: Run tests
+      run: npm test
+  
   # Ensure code is linted
   Lint:
     runs-on: ubuntu-latest
