@@ -4,9 +4,9 @@ import rootHello from '../controllers/rootHello';
 const router = Router();
 
 /**
- * GET /, for example at http://localhost:8080/
+ * GET /hello/world, for example at http://localhost:8080/hello/world
  * Returns "Hello World from the root!"
  */
-router.get('/', rootHello);
+router.get('/world', rootHello);
 
 export default router;

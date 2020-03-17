@@ -6,7 +6,7 @@ describe('GET /', () => {
     const expectedStatus = 200;
     const expectedBody = 'Hello world from the root!';
     return request(app)
-      .get('/')
+      .get('/hello/world')
       .expect(expectedStatus, expectedBody);
   });
 });
