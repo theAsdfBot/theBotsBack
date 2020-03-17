@@ -23,8 +23,8 @@ jobs:
     # Install dependencies
     - name: Install dependencies
       run: npm ci
-    # Run lint
-    - name: Run linter
+    # Run tests
+    - name: Run tests
       run: npm test
   
   # Ensure code is linted
