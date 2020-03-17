@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "ts-node-dev --respawn ./src/index.ts",
-    "lint": "eslint ./src/**/* --ext .ts,.js",
-    "lint-fix": "eslint ./src**/* --ext .ts,.js",
+    "lint": "eslint \"./src/**\" --ext .ts,.js",
+    "lint-fix": "eslint \"./src**\" --ext .ts,.js",
     "test": "jest"
   },
   "author": "",
