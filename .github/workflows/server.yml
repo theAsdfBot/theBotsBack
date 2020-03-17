@@ -6,6 +6,27 @@ name: BotNet Server
 on: [push]
 
 jobs:
+  # Ensure tests pass
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    # "checkout" this repo in Github's CI environment
+    - uses: actions/checkout@v2
+    # Install node.js
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    # Install dependencies
+    - name: Install dependencies
+      run: npm ci
+    # Run lint
+    - name: Run linter
+      run: npm test
+  
   # Ensure code is linted
   Lint:
     runs-on: ubuntu-latest
