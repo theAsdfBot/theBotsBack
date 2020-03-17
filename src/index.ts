@@ -11,5 +11,6 @@ syncDatabase(sequelize, true).then(() => {
     log.info(`Express listening on port ${config.port}`);
   });
 }).catch((err) => {
-  throw err;
+  log.error('Failed to connect to database', err);
+  process.exit(1);
 });
