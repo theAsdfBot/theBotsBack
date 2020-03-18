@@ -10,7 +10,7 @@ jobs:
   Tests:
     runs-on: ubuntu-latest
     container:
-      image: node:12
+      image: node:12-alpine
     services:
       postgres:
         image: latest
