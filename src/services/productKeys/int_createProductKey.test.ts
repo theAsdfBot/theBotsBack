@@ -17,7 +17,6 @@ describe('services/productKeys', () => {
   it('creates a new product key', async () => {
     const created = await createProductKey();
     const results = await ProductKey.findAll();
-    expect(results.length).toEqual(1);
     expect(results.map((r) => r.id))
       .toEqual([created.id]);
   });
