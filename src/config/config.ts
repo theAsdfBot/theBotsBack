@@ -9,6 +9,6 @@ export default {
   },
   production: {
     uri: process.env.DATABASE_URL || 'postgres://postgres:12345@localhost/production',
-    port: process.env.PORT || 8080,
+    port: Number(process.env.PORT) || 8080,
   },
 };
