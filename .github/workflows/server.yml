@@ -9,8 +9,6 @@ jobs:
   # Ensure tests pass
   Tests:
     runs-on: ubuntu-latest
-    container:
-      image: node:12
     services:
       postgres:
         image: postgres:latest
@@ -25,6 +23,11 @@ jobs:
     steps:
     # "checkout" this repo in Github's CI environment
     - uses: actions/checkout@v2
+    # Install node.js
+    - name: Use Node.js v12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
     # Install dependencies
     - name: Install dependencies
       run: npm ci
