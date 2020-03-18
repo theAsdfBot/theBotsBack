@@ -10,7 +10,7 @@ jobs:
   Tests:
     runs-on: ubuntu-latest
     services:
-      # Install postgres in the CI Docker environment
+      # Install postgres in a Docker container
       postgres:
         image: postgres:latest
         env:
@@ -19,6 +19,7 @@ jobs:
           POSTGRES_DB: test
         ports:
         # Connect the Docker container port 5432 to the CI machine's port 5432 port
+        # This lets us use postgres that is hosted within a container in the host machine (the CI env)
         - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
