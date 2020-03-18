@@ -26,7 +26,7 @@ const log = createLogger({
 });
 
 // If environment isn't production, log to console
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   /**
    * Only console transport will log debug
    */

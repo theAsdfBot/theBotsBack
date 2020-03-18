@@ -1,8 +1,12 @@
 import { Sequelize } from 'sequelize';
-import config from '../config/config';
 import log from '../util/log';
+import config from '../config/config';
 
-const { uri } = config;
+let { uri } = config.test;
+const env = process.env.NODE_ENV;
+if (env === 'production' || env === 'test') {
+  uri = config[env].uri;
+}
 
 export default new Sequelize(uri, {
   logging: (sqlString) => log.debug(sqlString),
