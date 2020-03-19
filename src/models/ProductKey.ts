@@ -17,7 +17,8 @@ class ProductKey extends Model {
 ProductKey.initialize = (sequelize: Sequelize) => {
   ProductKey.init({
     id: {
-      type: DataTypes.TEXT,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     expireAt: {
