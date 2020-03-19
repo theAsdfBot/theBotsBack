@@ -4,11 +4,17 @@ import log from './util/log';
 import app from './app';
 import config from './config/config';
 
+let { port } = config.development;
+const env = process.env.NODE_ENV;
+if (env === 'test' || env === 'production') {
+  port = config[env].port;
+}
+
 syncDatabase(sequelize, true).then(() => {
   log.debug('Database synced');
   // Proceed to boot up Skynet
-  app.listen(config.port, () => {
-    log.info(`Express listening on port ${config.port}`);
+  app.listen(port, () => {
+    log.info(`Express listening on port ${port}`);
   });
 }).catch((err) => {
   log.error('Failed to connect to database', err);
