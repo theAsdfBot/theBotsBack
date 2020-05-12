@@ -9,17 +9,28 @@ jobs:
   # Ensure tests pass
   Tests:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+    services:
+      # Install postgres in a Docker container
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 12345
+          POSTGRES_DB: test
+        ports:
+        # Connect the Docker container port 5432 to the CI machine's port 5432 port
+        # This lets us use postgres that is hosted within a container in the host machine (the CI env)
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     # "checkout" this repo in Github's CI environment
     - uses: actions/checkout@v2
     # Install node.js
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 12
     # Install dependencies
     - name: Install dependencies
       run: npm ci
