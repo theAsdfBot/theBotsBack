@@ -14,6 +14,7 @@ describe('services/productKeys', () => {
     });
   });
   afterAll(async () => {
+    await sequelize.drop();
     await sequelize.close();
   });
   it('creates a new product key', async () => {

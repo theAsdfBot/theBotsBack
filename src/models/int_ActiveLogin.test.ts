@@ -47,6 +47,7 @@ describe('models/ActiveLogin', () => {
     expect(logins).toHaveLength(0);
   });
   afterAll(async () => {
+    await sequelize.drop();
     await sequelize.close();
   });
 });
