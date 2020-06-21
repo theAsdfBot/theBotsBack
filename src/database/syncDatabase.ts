@@ -21,5 +21,4 @@ const sync = async (sequelize: Sequelize, force = false) => {
   });
 };
 
-
 export default sync;
