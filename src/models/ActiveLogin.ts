@@ -17,7 +17,6 @@ class ActiveLogin extends Model {
   static initialize: (sequelize: Sequelize) => void;
 }
 
-
 ActiveLogin.initialize = (sequelize: Sequelize) => {
   ActiveLogin.init({
     machineId: {
