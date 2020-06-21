@@ -12,7 +12,7 @@ describe('services/productKeys', () => {
       where: {},
       force: true,
     });
-  })
+  });
   afterAll(async () => {
     await sequelize.close();
   });
@@ -21,9 +21,9 @@ describe('services/productKeys', () => {
     expect(created.id).toBeDefined();
     const result = await ProductKey.findOne({
       where: {
-        id: created.id
-      }
+        id: created.id,
+      },
     });
-    expect(result).toBeDefined()
+    expect(result).toBeDefined();
   });
 });

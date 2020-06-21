@@ -18,12 +18,11 @@ class ActiveLogin extends Model {
 }
 
 
-
 ActiveLogin.initialize = (sequelize: Sequelize) => {
   ActiveLogin.init({
     machineId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
   }, {
     sequelize,
@@ -37,8 +36,8 @@ ActiveLogin.initialize = (sequelize: Sequelize) => {
       allowNull: false,
     },
     // Delete this login when its product key was deleted
-    onDelete: 'CASCADE'
-  })
+    onDelete: 'CASCADE',
+  });
 };
 
 export default ActiveLogin;
