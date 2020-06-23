@@ -9,7 +9,7 @@ export default async (id: string, days: number) => {
   if (!productKey || !productKey.expireAt) {
     throw new Error('Missing product key or product key expireAt');
   }
-  const ms = 1000 * 60 * 60 * 24 * days + 1;
+  const ms = 1000 * 60 * 60 * 24 * days;
   await productKey.update({
     expireAt: new Date(productKey.expireAt.getTime() + ms),
   });
