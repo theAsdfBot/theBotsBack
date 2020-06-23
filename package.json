@@ -11,7 +11,7 @@
     "lint": "eslint \"./src/**\" --ext .ts,.js",
     "lint-fix": "eslint \"./src**\" --ext .ts,.js",
     "test": "jest --runInBand",
-    "test-watch": "jest --runInBand --watchAll"
+    "test-watch": "jest --runInBand --watchAll src"
   },
   "author": "",
   "license": "ISC",
