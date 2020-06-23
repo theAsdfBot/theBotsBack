@@ -1,5 +1,3 @@
-import syncDatabase from '../../database/syncDatabase';
-import sequelize from '../../database/sequelize';
 import renew from './renew';
 import ProductKey from '../../models/ProductKey';
 
