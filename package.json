@@ -10,7 +10,7 @@
     "watch": "concurrently \"npm run watch-server\" \"npm run watch-client\"",
     "lint": "eslint \"./src/**\" --ext .ts,.js",
     "lint-fix": "eslint \"./src**\" --ext .ts,.js",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand src",
     "test-watch": "jest --runInBand --watchAll src"
   },
   "author": "",
