@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { send } from 'process';
 import app from '../../app';
 import ProductKey from '../../models/ProductKey';
 import syncDatabase from '../../database/syncDatabase';
@@ -51,6 +52,17 @@ describe('routes/api/index', () => {
           productKey: uuid,
         },
       })).resolves.toBeDefined();
+    });
+    it('returns 400 if the product key does not exist', async () => {
+      const uuid = '70840291-77e8-4022-b6af-e134f93261f4';
+      const machineId = 'machineid';
+      await request(app)
+        .post('/api/login')
+        .send({
+          productKey: uuid,
+          machineId,
+        })
+        .expect(400);
     });
   });
 });
