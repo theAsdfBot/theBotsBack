@@ -25,9 +25,9 @@ describe('services/activeLogins/logoutIsAuthorized', () => {
       machineId,
     });
     await expect(logoutIsAuthorized(productKeyID, `${machineId}abcd`))
-      .resolves.toBeNull();
+      .resolves.toEqual(false);
     await expect(logoutIsAuthorized(productKeyID, machineId))
-      .resolves.toBeDefined();
+      .resolves.toEqual(true);
   });
   afterAll(async () => {
     await sequelize.drop();
