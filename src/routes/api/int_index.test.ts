@@ -1,5 +1,4 @@
 import request from 'supertest';
-import { send } from 'process';
 import app from '../../app';
 import ProductKey from '../../models/ProductKey';
 import syncDatabase from '../../database/syncDatabase';
