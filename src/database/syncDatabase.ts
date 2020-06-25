@@ -10,7 +10,7 @@ import ActiveLogin from '../models/ActiveLogin';
  * @param sequelize Sequelize instance
  * @param force Drop existing tables if they exist
  */
-const sync = async (sequelize: Sequelize, force = false) => {
+export default async (sequelize: Sequelize, force = false) => {
   ProductKey.initialize(sequelize);
   // Product key must be initialized before Active Login for foreign keys
   ActiveLogin.initialize(sequelize);
@@ -20,5 +20,3 @@ const sync = async (sequelize: Sequelize, force = false) => {
     force,
   });
 };
-
-export default sync;
