@@ -1,6 +1,7 @@
 import path from 'path';
 import express from 'express';
 import routeHandler from './routes/index';
+import apiRouter from './routes/api/index';
 
 const app = express();
 
@@ -10,6 +11,9 @@ app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 // Handle all routes after /hello with routeHandler
 app.use('/hello', routeHandler);
+
+// API Routes
+app.use('/api', apiRouter);
 
 // Send everything else the generated react js files
 app.get('*', (req, res) => {
