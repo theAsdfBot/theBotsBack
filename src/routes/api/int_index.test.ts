@@ -45,7 +45,8 @@ describe('routes/api/index', () => {
         .send({
           productKey: uuid,
           machineId,
-        });
+        })
+        .expect(204);
       await expect(ActiveLogin.findOne({
         where: {
           productKey: uuid,
@@ -62,6 +63,24 @@ describe('routes/api/index', () => {
           machineId,
         })
         .expect(400);
+    });
+    it('returns 204 if already logged in', async () => {
+      const uuid = 'fe7ea467-b61f-4af8-bc75-ab6bfa81648a';
+      const machineId = 'machineid';
+      await ProductKey.create({
+        id: uuid,
+      });
+      await ActiveLogin.create({
+        productKey: uuid,
+        machineId,
+      });
+      await request(app)
+        .post('/api/login')
+        .send({
+          productKey: uuid,
+          machineId,
+        })
+        .expect(204);
     });
   });
 });
