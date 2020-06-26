@@ -12,8 +12,6 @@ class ActiveLogin extends Model {
   // updatedAt is inherent to Model
   public readonly updatedAt!: Date;
 
-  public readonly expireAt!: Date;
-
   static initialize: (sequelize: Sequelize) => void;
 }
 
