@@ -3,12 +3,15 @@ import { Request, Response, NextFunction } from 'express';
 import exists from '../../services/productKeys/exists';
 import loginKey from './loginKey';
 import login from '../../services/activeLogins/login';
+import logoutIsAuthorized from '../../services/activeLogins/logoutIsAuthorized';
 
 jest.mock('../../services/productKeys/exists');
 jest.mock('../../services/activeLogins/login');
+jest.mock('../../services/activeLogins/logoutIsAuthorized');
 
 const mockedExists = mocked(exists);
 const mockedLogin = mocked(login);
+const mockedLogoutIsAuthorized = mocked(logoutIsAuthorized);
 
 describe('controllers/api/loginKey', () => {
   let req: Request;
@@ -39,6 +42,7 @@ describe('controllers/api/loginKey', () => {
   });
   it('returns 204 if successful', async () => {
     mockedExists.mockResolvedValue(true);
+    mockedLogoutIsAuthorized.mockResolvedValue(true);
     mockedLogin.mockResolvedValue();
     await loginKey(req, res, next);
     expect(res.status).toHaveBeenCalledWith(204);
@@ -50,9 +54,17 @@ describe('controllers/api/loginKey', () => {
     await loginKey(req, res, next);
     expect(next).toHaveBeenCalledWith(existsError);
   });
+  it('calls next if auth check fails', async () => {
+    const authError = new Error('auth err');
+    mockedExists.mockResolvedValue(true);
+    mockedLogoutIsAuthorized.mockRejectedValue(authError);
+    await loginKey(req, res, next);
+    expect(next).toHaveBeenCalledWith(authError);
+  });
   it('calls err if login service fails', async () => {
     const loginError = new Error('login error');
     mockedExists.mockResolvedValue(true);
+    mockedLogoutIsAuthorized.mockResolvedValue(false);
     mockedLogin.mockRejectedValue(loginError);
     await loginKey(req, res, next);
     expect(next).toHaveBeenCalledWith(loginError);
