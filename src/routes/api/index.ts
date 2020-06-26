@@ -3,6 +3,7 @@ import { object, string } from 'superstruct';
 import loginKey from '../../controllers/api/loginKey';
 import validateBody from '../../util/validateBody';
 import logoutKey from '../../controllers/api/logoutKey';
+import productKeyExists from '../../middleware/productKeyExists';
 
 const router = Router();
 
@@ -11,11 +12,16 @@ const LoginSchema = object({
   machineId: string(),
 });
 
-/**
- * GET /api/login, for example at http://localhost:8080/api/login
- */
-router.post('/login', validateBody(LoginSchema), loginKey);
+router.use(validateBody(LoginSchema), productKeyExists);
 
-router.post('/logout', validateBody(LoginSchema), logoutKey);
+/**
+ * POST /api/login
+ */
+router.post('/login', loginKey);
+
+/**
+ * POST /api/logout
+ */
+router.post('/logout', logoutKey);
 
 export default router;
